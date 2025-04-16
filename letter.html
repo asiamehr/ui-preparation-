@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Love Letter</title>
+    <style>
+        /* Modern letter container */
+        .love-letter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .love-letter-container.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Modern square letter design */
+        .modern-letter {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .love-letter-container.active .modern-letter {
+            transform: scale(1);
+        }
+        
+        /* Letter header with emerald green accent */
+        .letter-header {
+            background: #046307;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .letter-header h2 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .letter-header p {
+            margin: 5px 0 0;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        /* Close button */
+        .close-letter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        
+        .close-letter:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Letter content */
+        .letter-content {
+            padding: 25px;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .letter-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* Signature */
+        .signature {
+            margin-top: 30px;
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #046307;
+        }
+        
+        /* Trigger button */
+        .letter-trigger {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #046307;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(4, 99, 7, 0.4);
+            transition: all 0.3s;
+            z-index: 100;
+            font-weight: 600;
+        }
+        
+        .letter-trigger:hover {
+            background: #05850a;
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 500px) {
+            .modern-letter {
+                width: 95%;
+            }
+            
+            .letter-content {
+                padding: 20px;
+                max-height: 50vh;
+            }
+            
+            .letter-header h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Trigger Button -->
+    <button class="letter-trigger" id="letterTrigger">Read My Love Letter</button>
+    
+    <!-- Modern Love Letter -->
+    <div class="love-letter-container" id="loveLetterContainer">
+        <div class="modern-letter">
+            <div class="letter-header">
+                <button class="close-letter" id="closeLetter">×</button>
+                <h2>To My Beloved</h2>
+                <p>On your special day...</p>
+            </div>
+            <div class="letter-content">
+                <p>My love,</p>
+                
+                <p>As I sit here thinking of you, my heart feels so full. You've brought more joy into my life than I ever thought possible. Today, on your birthday, I want you to know how incredibly special you are to me.</p>
+                
+                <p>Your smile brightens my darkest days, your laughter is my favorite melody, and your love is the greatest gift I've ever received. I cherish every moment we spend together, from our adventures to our quiet nights in.</p>
+                
+                <p>You inspire me to be better, love deeper, and dream bigger. With you, I've found a love that feels like home - safe, warm, and filled with endless possibilities.</p>
+                
+                <p>Happy birthday to the most amazing person I know. May this year bring you as much happiness as you've brought into my life.</p>
+                
+                <div class="signature">
+                    <p>Forever yours,</p>
+                    <p>[Your Name]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const letterTrigger = document.getElementById('letterTrigger');
+        const loveLetterContainer = document.getElementById('loveLetterContainer');
+        const closeLetter = document.getElementById('closeLetter');
+        
+        // Open letter
+        letterTrigger.addEventListener('click', () => {
+            loveLetterContainer.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+        
+        // Close letter
+        closeLetter.addEventListener('click', () => {
+            loveLetterContainer.classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+        
+        // Close when clicking outside letter
+        loveLetterContainer.addEventListener('click', (e) => {
+            if (e.target === loveLetterContainer) {
+                loveLetterContainer.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>

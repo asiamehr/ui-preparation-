@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background-color: #000;
+  }
+  a{
+    text-decoration: none;
+  }
+  .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+  }
+  .container a {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 2px 2px 5px #000;
+    text-decoration: none; /* This removes the underline */
+    list-style: none; /* Note: This property doesn't affect anchor tags */
+}
+.container a:hover {
+    text-decoration: none; /* Ensures underline doesn't appear on hover */
+    /* Add any other hover effects you want */
+    color: #f8f8f8; /* Slightly different white on hover */
+    text-shadow: 2px 2px 8px #000; /* Enhanced shadow on hover */
+}
+  #typing-text {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 2px 2px 5px #000;
+  }
+  
+  body {
+    background: url('https://wallpaperaccess.com/full/6568510.jpg') no-repeat center center/cover;
+  }
+  
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  #letter {
+    background-color: #fef2e4;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+    border: 2px solid #ff6b6b;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.letterContent {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.greeting {
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+#birthdayMessage {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ff9a8b;
+    font-weight: bold;
+}
+.letter-wrapper {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@1&display=swap');
+

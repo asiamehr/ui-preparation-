@@ -1,0 +1,174 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Polaroid Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fffafc;
+      font-family: 'Courier New', monospace;
+      overflow-x: hidden;
+    }
+
+    .gallery {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .polaroid {
+      background: white;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 10px;
+      margin: 20px auto;
+      max-width: 90%;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .caption {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* 💻 Style for desktop */
+    @media(min-width: 768px) {
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .polaroid {
+        position: absolute;
+        width: 180px;
+        transform: rotate(var(--rotate));
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery" id="gallery">
+    <div class="polaroid" style="--rotate: -6deg; top: 60px; left: 100px;">
+      <img src="./images/islamic.png" alt="photo1"/>
+      <div class="caption">Our first talk 💬</div>
+    </div>
+    <div class="polaroid" style="--rotate: 4deg; top: 250px; left: 300px;">
+      <img src="./images/islamic.png" alt="photo2"/>
+      <div class="caption">His fav sushi 🍣</div>
+    </div>
+    <div class="polaroid" style="--rotate: -3deg; top: 100px; left: 550px;">
+        <img src="./images/islamic.png" alt="photo3"/>
+        <div class="caption">Nature lover 🌲</div>
+      </div>
+      <div class="polaroid" style="--rotate: -3deg; top: 100px; left: 550px;">
+        <img src="./images/islamic.png" alt="photo3"/>
+        <div class="caption">Nature lover 🌲</div>
+      </div>
+    <div class="polaroid" style="--rotate: -3deg; top: 100px; left: 550px;">
+      <img src="./images/islamic.png" alt="photo3"/>
+      <div class="caption">Nature lover 🌲</div>
+    </div>
+    <div class="polaroid" style="--rotate: -3deg; top: 100px; left: 550px;">
+        <img src="./images/islamic.png" alt="photo3"/>
+        <div class="caption">Nature lover 🌲</div>
+      </div>
+      <div class="polaroid" style="--rotate: -3deg; top: 100px; left: 550px;">
+        <img src="./images/islamic.png" alt="photo3"/>
+        <div class="caption">Nature lover 🌲</div>
+      </div>
+    <svg id="lines"></svg>
+  </div>
+
+  <script>
+    function drawLines() {
+      const polaroids = document.querySelectorAll('.polaroid');
+      const svg = document.getElementById('lines');
+      svg.innerHTML = "";
+
+      if (window.innerWidth < 768) return;
+
+      polaroids.forEach((from, i) => {
+        if (i < polaroids.length - 1) {
+          const to = polaroids[i + 1];
+          const fromRect = from.getBoundingClientRect();
+          const toRect = to.getBoundingClientRect();
+
+          const x1 = fromRect.left + fromRect.width / 2;
+          const y1 = fromRect.top + fromRect.height / 2;
+          const x2 = toRect.left + toRect.width / 2;
+          const y2 = toRect.top + toRect.height / 2;
+
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", x1);
+          line.setAttribute("y1", y1);
+          line.setAttribute("x2", x2);
+          line.setAttribute("y2", y2);
+          line.setAttribute("stroke", "#c76e94");
+          line.setAttribute("stroke-dasharray", "6,4");
+          line.setAttribute("stroke-width", "2");
+          svg.appendChild(line);
+        }
+      });
+    }
+
+    drawLines();
+    window.addEventListener('resize', drawLines);
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="poloride.css">
+</head>
+<body>
+    <div class="polaroid" style="--rotate: -6deg;">
+        <img src="./images/islamic.png" alt="photo1" />
+        <div class="caption">Our first talk 💬</div>
+      </div>
+      <div class="polaroid" style="--rotate: 3deg;">
+        <img src="./images/islamic.png" alt="photo2" />
+        <div class="caption">Sushi memory 🍣</div>
+      </div>
+      <div class="polaroid" style="--rotate: -4deg;">
+        <img src="./images/islamic.png" alt="photo3" />
+        <div class="caption">Nature 🌲</div>
+      </div>
+      <div class="polaroid" style="--rotate: 5deg;">
+        <img src="./images/islamic.png" alt="photo4" />
+        <div class="caption">Funny moment 😂</div>
+      </div>
+      <div class="polaroid" style="--rotate: -2deg;">
+        <img src="./images/islamic.png" alt="photo5" />
+        <div class="caption">Sunset vibes 🌅</div>
+      </div>
+      <!-- ادامه بده با عکس‌های دلخواه -->
+      
+    <script src="script.js"></script>
+</body>
+</html>

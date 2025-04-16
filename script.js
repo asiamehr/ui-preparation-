@@ -101,3 +101,80 @@ document.getElementById('openLetterBtn').addEventListener('click', function() {
         document.getElementById('birthdayMessage').classList.remove('hidden');
     }, 2000);
 });
+function createFlower() {
+  hearts.push({
+    x: Math.random() * canvas.width,
+    y: 0,
+    size: Math.random() * 15 + 10,
+    speed: Math.random() * 1.5 + 0.5,
+    rotation: Math.random() * Math.PI * 2,
+    rotationSpeed: (Math.random() - 0.5) * 0.05,
+    petals: Math.floor(Math.random() * 3) + 5 // 5-7 petals
+  });
+}
+
+function drawFlowers() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hearts.forEach((flower, i) => {
+    ctx.save();
+    ctx.translate(flower.x, flower.y);
+    ctx.rotate(flower.rotation);
+    
+    // Draw flower center
+    ctx.beginPath();
+    ctx.arc(0, 0, flower.size * 0.3, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFD700'; // Golden center
+    ctx.fill();
+    
+    // Draw petals
+    for (let i = 0; i < flower.petals; i++) {
+      const angle = (i / flower.petals) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.ellipse(
+        Math.cos(angle) * flower.size * 0.8, 
+        Math.sin(angle) * flower.size * 0.8,
+        flower.size * 0.5, 
+        flower.size * 0.2, 
+        angle, 
+        0, 
+        Math.PI * 2
+      );
+      ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, 0.8)`;
+      ctx.fill();
+    }
+    
+    ctx.restore();
+    
+    flower.y += flower.speed;
+    flower.rotation += flower.rotationSpeed;
+    if (flower.y > canvas.height) hearts.splice(i, 1);
+  });
+}
+function createBubble() {
+  hearts.push({
+    x: Math.random() * canvas.width,
+    y: canvas.height + 10,
+    size: Math.random() * 20 + 10,
+    speed: Math.random() * 2 + 1,
+    color: `hsla(${Math.random() * 60 + 280}, 70%, 70%, 0.7)`
+  });
+}
+
+function drawBubbles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hearts.forEach((bubble, i) => {
+    ctx.beginPath();
+    ctx.arc(bubble.x, bubble.y, bubble.size, 0, Math.PI * 2);
+    ctx.fillStyle = bubble.color;
+    ctx.fill();
+    
+    // Bubble shine effect
+    ctx.beginPath();
+    ctx.arc(bubble.x - bubble.size * 0.3, bubble.y - bubble.size * 0.3, bubble.size * 0.2, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.fill();
+    
+    bubble.y -= bubble.speed;
+    if (bubble.y < -20) hearts.splice(i, 1);
+  });
+}

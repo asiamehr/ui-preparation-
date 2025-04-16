@@ -227,13 +227,25 @@
                 height: 91px;
             }
         }
+        
     </style>
 </head>
 <body>
     <div class="balloon-container">
-        <div class="balloon-row" id="balloonRow"></div>
+        <div class="balloon-row" id="happyRow"></div>
+        <div class="balloon-row" id="lukieRow" style="top: 130px;"></div>
+        <div class="balloon-row" id="numberRow" style="top: 220px;"></div>
+
+     
+    </div>
+
+    <div>
+        <a href="letter.html">Click on 27</a>
+       
     </div>
     <div class="cake-container">
+        
+    
         <div class="cake">
             <div class="candle">
                 <div class="flame"></div>
@@ -243,41 +255,43 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const balloonRow = document.getElementById('balloonRow');
+        document.addEventListener('DOMContentLoaded', function () {
             const colors = ['#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#536DFE', '#448AFF', '#40C4FF', '#18FFFF', '#64FFDA', '#69F0AE', '#B2FF59', '#EEFF41', '#FFFF00', '#FFD740', '#FFAB40', '#FF6E40'];
-            const text = "HAPPY BIRTHDAY";
-            
-            // Create balloons for each letter
-            for (let i = 0; i < text.length; i++) {
-                const balloon = document.createElement('div');
-                balloon.className = 'balloon';
-                balloon.textContent = text[i];
-                
-                // Set balloon properties
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const delay = i * 0.3;
-                const duration = 3 + Math.random() * 2;
-                const finalRotate = `${Math.random() * 20 - 10}deg`;
-                
-                balloon.style.setProperty('--final-rotate', finalRotate);
-                balloon.style.backgroundColor = color;
-                balloon.style.animationDelay = `${delay}s`;
-                balloon.style.animationDuration = `${duration}s`;
-                balloon.style.animationName = 'floatUp';
-                
-                balloonRow.appendChild(balloon);
+
+            function createBalloons(text, containerId, delayOffset = 0) {
+                const container = document.getElementById(containerId);
+                for (let i = 0; i < text.length; i++) {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.textContent = text[i];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const delay = i * 0.3 + delayOffset;
+                    const duration = 3 + Math.random() * 2;
+                    const finalRotate = `${Math.random() * 20 - 10}deg`;
+
+                    balloon.style.setProperty('--final-rotate', finalRotate);
+                    balloon.style.backgroundColor = color;
+                    balloon.style.animationDelay = `${delay}s`;
+                    balloon.style.animationDuration = `${duration}s`;
+                    balloon.style.animationName = 'floatUp';
+
+                    container.appendChild(balloon);
+                }
             }
-            
-            // Create confetti after balloons reach top
-            setTimeout(createConfetti, (text.length * 0.3 + 3) * 1000);
-            
+
+            createBalloons("HAPPYBIRTHDAY", "happyRow");
+            createBalloons("LUKIE", "lukieRow", 0.3 * 13);
+            createBalloons("27", "numberRow", 0.3 * 18);
+
+            // Confetti
+            setTimeout(createConfetti, 0.3 * 20 * 1000);
+
             function createConfetti() {
-                const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
+                const confettiColors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
                 for (let i = 0; i < 100; i++) {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
                     confetti.style.left = `${Math.random() * 100}%`;
                     confetti.style.top = '0';
                     confetti.style.width = `${Math.random() * 10 + 5}px`;
@@ -286,14 +300,12 @@
                     confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear forwards`;
                     confetti.style.animationDelay = `${Math.random() * 2}s`;
                     document.body.appendChild(confetti);
-                    
-                    // Remove confetti after animation
-                    setTimeout(() => {
-                        confetti.remove();
-                    }, 5000);
+
+                    setTimeout(() => confetti.remove(), 5000);
                 }
             }
         });
     </script>
 </body>
+
 </html>

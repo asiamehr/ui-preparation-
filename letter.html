@@ -3,212 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Love Letter</title>
+    <title>Romantic Surprise</title>
     <style>
-        /* Modern letter container */
-        .love-letter-container {
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff0f5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #typing-container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        #typing-text {
+            font-size: 2.5rem;
+            color: #d23669;
+            height: 60px;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        #letter {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 40px auto;
+            position: relative;
+            display: none;
+        }
+
+        #letter:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            border-radius: 10px 10px 0 0;
+        }
+
+        #birthdayMessage {
+            font-size: 1.5rem;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+            display: none;
+        }
+
+        #openLetterBtn {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #openLetterBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transform: rotate(5deg);
+            transition: all 0.3s ease;
+            margin: 20px;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        #lines {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0,0,0,0.7);
-            z-index: 1000;
-            opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            z-index: -1;
         }
-        
-        .love-letter-container.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        /* Modern square letter design */
-        .modern-letter {
-            width: 90%;
-            max-width: 400px;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-        
-        .love-letter-container.active .modern-letter {
-            transform: scale(1);
-        }
-        
-        /* Letter header with emerald green accent */
-        .letter-header {
-            background: #046307;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .letter-header h2 {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
-        
-        .letter-header p {
-            margin: 5px 0 0;
-            font-style: italic;
-            opacity: 0.9;
-        }
-        
-        /* Close button */
-        .close-letter {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s;
-        }
-        
-        .close-letter:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        
-        /* Letter content */
-        .letter-content {
-            padding: 25px;
-            font-family: 'Open Sans', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-        
-        .letter-content p {
-            margin-bottom: 15px;
-        }
-        
-        /* Signature */
-        .signature {
-            margin-top: 30px;
-            text-align: right;
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: #046307;
-        }
-        
-        /* Trigger button */
-        .letter-trigger {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #046307;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(4, 99, 7, 0.4);
-            transition: all 0.3s;
-            z-index: 100;
-            font-weight: 600;
-        }
-        
-        .letter-trigger:hover {
-            background: #05850a;
-            transform: translateX(-50%) scale(1.05);
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 500px) {
-            .modern-letter {
-                width: 95%;
+
+        @media (max-width: 768px) {
+            #typing-text {
+                font-size: 1.8rem;
             }
             
-            .letter-content {
+            #letter {
+                margin: 20px;
                 padding: 20px;
-                max-height: 50vh;
-            }
-            
-            .letter-header h2 {
-                font-size: 1.3rem;
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Trigger Button -->
-    <button class="letter-trigger" id="letterTrigger">Read My Love Letter</button>
-    
-    <!-- Modern Love Letter -->
-    <div class="love-letter-container" id="loveLetterContainer">
-        <div class="modern-letter">
-            <div class="letter-header">
-                <button class="close-letter" id="closeLetter">×</button>
-                <h2>To My Beloved</h2>
-                <p>On your special day...</p>
-            </div>
-            <div class="letter-content">
-                <p>My love,</p>
-                
-                <p>As I sit here thinking of you, my heart feels so full. You've brought more joy into my life than I ever thought possible. Today, on your birthday, I want you to know how incredibly special you are to me.</p>
-                
-                <p>Your smile brightens my darkest days, your laughter is my favorite melody, and your love is the greatest gift I've ever received. I cherish every moment we spend together, from our adventures to our quiet nights in.</p>
-                
-                <p>You inspire me to be better, love deeper, and dream bigger. With you, I've found a love that feels like home - safe, warm, and filled with endless possibilities.</p>
-                
-                <p>Happy birthday to the most amazing person I know. May this year bring you as much happiness as you've brought into my life.</p>
-                
-                <div class="signature">
-                    <p>Forever yours,</p>
-                    <p>[Your Name]</p>
-                </div>
-            </div>
-        </div>
+    <canvas id="flower-canvas"></canvas>
+    <svg id="lines" xmlns="http://www.w3.org/2000/svg"></svg>
+
+    <div id="typing-container">
+        <div id="typing-text"></div>
+    </div>
+
+    <button id="openLetterBtn">Open Special Letter</button>
+
+    <div id="letter">
+        <p id="birthdayMessage">
+            To someone special,<br><br>
+            On this beautiful day, I wanted to send you flowers that will never fade,<br>
+            stars that will always shine, and love that will never end.<br><br>
+            You make every moment magical...
+        </p>
     </div>
 
     <script>
-        const letterTrigger = document.getElementById('letterTrigger');
-        const loveLetterContainer = document.getElementById('loveLetterContainer');
-        const closeLetter = document.getElementById('closeLetter');
-        
-        // Open letter
-        letterTrigger.addEventListener('click', () => {
-            loveLetterContainer.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        });
-        
-        // Close letter
-        closeLetter.addEventListener('click', () => {
-            loveLetterContainer.classList.remove('active');
-            document.body.style.overflow = ''; // Re-enable scrolling
-        });
-        
-        // Close when clicking outside letter
-        loveLetterContainer.addEventListener('click', (e) => {
-            if (e.target === loveLetterContainer) {
-                loveLetterContainer.classList.remove('active');
-                document.body.style.overflow = '';
+        // Typing Effect
+        const text = "FOR SOMEONE SPECIAL";
+        let index = 0;
+        const typingSpeed = 100;
+        const typingElement = document.getElementById("typing-text");
+
+        function typeText() {
+            if (index < text.length) {
+                typingElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeText, typingSpeed);
+            } else {
+                // Show the button after typing completes
+                document.getElementById('openLetterBtn').style.display = 'block';
             }
+        }
+        
+        // Start typing after a short delay
+        setTimeout(typeText, 500);
+
+        // Flower Rain Effect
+        const canvas = document.getElementById("flower-canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let flowers = [];
+
+        function createFlower() {
+            flowers.push({
+                x: Math.random() * canvas.width,
+                y: 0,
+                size: Math.random() * 15 + 10,
+                speed: Math.random() * 1.5 + 0.5,
+                rotation: Math.random() * Math.PI * 2,
+                rotationSpeed: (Math.random() - 0.5) * 0.05,
+                petals: Math.floor(Math.random() * 3) + 5, // 5-7 petals
+                color: `hsl(${Math.random() * 60 + 330}, 70%, 70%)` // Pink/purple hues
+            });
+        }
+
+        function drawFlowers() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            flowers.forEach((flower, i) => {
+                ctx.save();
+                ctx.translate(flower.x, flower.y);
+                ctx.rotate(flower.rotation);
+                
+                // Draw flower center
+                ctx.beginPath();
+                ctx.arc(0, 0, flower.size * 0.3, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFD700'; // Golden center
+                ctx.fill();
+                
+                // Draw petals
+                for (let i = 0; i < flower.petals; i++) {
+                    const angle = (i / flower.petals) * Math.PI * 2;
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        Math.cos(angle) * flower.size * 0.8, 
+                        Math.sin(angle) * flower.size * 0.8,
+                        flower.size * 0.5, 
+                        flower.size * 0.2, 
+                        angle, 
+                        0, 
+                        Math.PI * 2
+                    );
+                    ctx.fillStyle = flower.color;
+                    ctx.fill();
+                }
+                
+                ctx.restore();
+                
+                flower.y += flower.speed;
+                flower.rotation += flower.rotationSpeed;
+                if (flower.y > canvas.height) flowers.splice(i, 1);
+            });
+        }
+
+        function animate() {
+            drawFlowers();
+            requestAnimationFrame(animate);
+        }
+
+        // Create flowers at intervals
+        setInterval(createFlower, 300);
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
+
+        // Letter opening functionality
+        document.getElementById('openLetterBtn').addEventListener('click', function() {
+            const letter = document.getElementById('letter');
+            letter.style.display = 'block';
+            
+            // Animate appearance
+            setTimeout(() => {
+                letter.style.opacity = '1';
+                letter.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Show the message after a delay
+            setTimeout(function() {
+                document.getElementById('birthdayMessage').style.display = 'block';
+            }, 1000);
+            
+            // Hide the button
+            this.style.display = 'none';
+        });
+
+        // Initially hide the button
+        document.getElementById('openLetterBtn').style.display = 'none';
     </script>
 </body>
 </html>

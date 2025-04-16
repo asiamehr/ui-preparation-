@@ -1,0 +1,344 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Butterfly Dream</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #typing-container {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    #typing-text {
+      font-size: 2.5rem;
+      color: #4e342e;
+      height: 60px;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    #letter {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 40px auto;
+      position: relative;
+      display: none;
+      border: 2px dashed #8bc34a;
+    }
+
+    #letter:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: linear-gradient(to right, #81c784, #aed581);
+      border-radius: 10px 10px 0 0;
+    }
+
+    #message {
+      font-size: 1.4rem;
+      color: #3e2723;
+      line-height: 1.7;
+      text-align: center;
+      display: none;
+    }
+
+    #openLetterBtn {
+      background: linear-gradient(to right, #81d4fa, #aed581);
+      color: #263238;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 30px;
+      box-shadow: 0 4px 12px rgba(129, 212, 250, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    #openLetterBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(129, 212, 250, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      #typing-text {
+        font-size: 1.8rem;
+      }
+
+      #letter {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="butterfly-canvas"></canvas>
+
+  <div id="typing-container">
+    <div id="typing-text"></div>
+  </div>
+
+  <button id="openLetterBtn">Open Your Tree of Love</button>
+
+  <div id="letter">
+    <p id="message">
+      Dearest heart,<br><br>
+      May the butterflies whisper dreams into your soul,<br>
+      and the trees sway to the rhythm of our memories.<br>
+      With every breeze, I send you my love... endlessly.<br><br>
+      You're my serenity, my springtime forever.
+    </p>
+  </div>
+
+  <script>
+    // Typing Effect
+    const text = "TO MY SPRING SOUL";
+    let index = 0;
+    const typingSpeed = 100;
+    const typingElement = document.getElementById("typing-text");
+
+    function typeText() {
+      if (index < text.length) {
+        typingElement.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText, typingSpeed);
+      } else {
+        document.getElementById('openLetterBtn').style.display = 'block';
+      }
+    }
+
+    setTimeout(typeText, 500);
+
+    // Butterfly Effect
+    const canvas = document.getElementById("butterfly-canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let butterflies = [];
+
+    function createButterfly() {
+      butterflies.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 25 + 10,
+        speedX: (Math.random() - 0.5) * 2,
+        speedY: (Math.random() - 0.5) * 2,
+        color: `hsl(${Math.random() * 360}, 80%, 70%)`
+      });
+    }
+
+    function drawButterflies() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      butterflies.forEach((b) => {
+        ctx.beginPath();
+        ctx.moveTo(b.x, b.y);
+        ctx.ellipse(b.x, b.y, b.size, b.size / 2, 0, 0, Math.PI * 2);
+        ctx.fillStyle = b.color;
+        ctx.fill();
+      });
+    }
+
+    function animate() {
+      butterflies.forEach((b) => {
+        b.x += b.speedX;
+        b.y += b.speedY;
+
+        if (b.x > canvas.width || b.x < 0) b.speedX *= -1;
+        if (b.y > canvas.height || b.y < 0) b.speedY *= -1;
+      });
+      drawButterflies();
+      requestAnimationFrame(animate);
+    }
+
+    for (let i = 0; i < 20; i++) createButterfly();
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    document.getElementById('openLetterBtn').addEventListener('click', function() {
+      const letter = document.getElementById('letter');
+      letter.style.display = 'block';
+
+      setTimeout(() => {
+        letter.style.opacity = '1';
+        letter.style.transform = 'translateY(0)';
+      }, 10);
+
+      setTimeout(function() {
+        document.getElementById('message').style.display = 'block';
+      }, 1000);
+
+      this.style.display = 'none';
+    });
+
+    document.getElementById('openLetterBtn').style.display = 'none';
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نامه تولد</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(#f9f6f2, #e0dcd5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    .envelope-container {
+      perspective: 2000px;
+    }
+
+    .envelope {
+      width: 700px;
+      height: 470px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+      cursor: pointer;
+    }
+
+    .envelope.open {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      background: #f5f0e1;
+      backface-visibility: hidden;
+    }
+
+    .front {
+      z-index: 2;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), #fffdf8;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .ribbon {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: #a00;
+      transform: translateY(-50%);
+    }
+
+    .wax-seal {
+      width: 60px;
+      height: 60px;
+      background: #b71c1c;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: inset 0 0 5px #800, 0 0 10px rgba(0,0,0,0.4);
+      z-index: 3;
+    }
+
+    .letter-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: 22px;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .letter-text h2 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    @media (max-width: 500px) {
+      .envelope {
+        width: 90vw;
+        height: auto;
+        aspect-ratio: 3/2;
+      }
+
+      .wax-seal {
+        width: 45px;
+        height: 45px;
+      }
+
+      .letter-text {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope-container">
+    <div class="envelope" id="envelope">
+      <div class="front">
+        <div class="ribbon"></div>
+        <div class="wax-seal"></div>
+      </div>
+      <div class="back">
+        <div class="letter-text">
+          <h2>Happy Birthday, Lukie 🎉</h2>
+          <p>Wishing you a magical year ahead, full of dreams come true, moments of joy, and endless love. 💖</p>
+          <p>With all my heart —</p>
+          <p>Your Secret Friend</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    envelope.addEventListener('click', () => {
+      envelope.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
